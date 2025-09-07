@@ -9,6 +9,8 @@ export default function Cart() {
     const dispatch = useDispatch();
   const total = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL; // Vercel-ready environment variable
+
     const handleCheckout = async () => {
     try {
         const orderData = {
@@ -20,7 +22,7 @@ export default function Cart() {
         };
 
       const token = Cookies.get("token"); // JWT token from login
-        await axios.post("http://localhost:5000/api/orders", orderData, {
+        await axios.post(`${API_URL}/api/orders`, orderData, {
         headers: { Authorization: `Bearer ${token}` },
         });
 

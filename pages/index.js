@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 export default function Home() {
     const [products, setProducts] = useState([]);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL; // Use env variable
+
     useEffect(() => {
-    axios.get("/api/products")
+    axios.get(`${API_URL}/api/products`)
         .then(res => setProducts(res.data))
         .catch(err => console.error("Error fetching products:", err));
     }, []);
